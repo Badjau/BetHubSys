@@ -9,18 +9,18 @@
   <body>
     <main class="page">
       <form id="entry-form" class="entry-form" autocomplete="off">
-        <label class="field">
-          <span class="visually-hidden">Insert Number</span>
-          <input id="number" name="number" type="text" placeholder="Insert Number" required>
-        </label>
-        <label class="field">
-          <span class="visually-hidden">Quantity</span>
-          <input id="quantity" name="quantity" type="number" min="0.01" step="any" placeholder="Quantity" required>
-        </label>
-        <label class="field">
-          <span class="visually-hidden">Enter Amount</span>
-          <input id="amount" name="amount" type="number" min="0.01" step="any" placeholder="Enter Amount" required>
-        </label>
+        <div class="field">
+          <input id="number" name="number" type="text" placeholder="0" required>
+          <label for="number">Number</label>
+        </div>
+        <div class="field">
+          <input id="quantity" name="quantity" type="number" min="0.01" step="any" placeholder="0" required>
+          <label for="quantity">Quantity</label>
+        </div>
+        <div class="field">
+          <input id="amount" name="amount" type="number" min="0.01" step="0.01" placeholder="0.00" inputmode="decimal" required>
+          <label for="amount">Enter Amount</label>
+        </div>
         <button class="button add-button" type="submit">ADD</button>
       </form>
 
@@ -42,11 +42,6 @@
         <button id="submit-button" class="button" type="button">PAY</button>
       </div>
 
-      <section id="overview" class="overview" aria-labelledby="overview-title" hidden>
-        <h1 id="overview-title">Overview</h1>
-        <p id="overview-total" class="overview-total"></p>
-        <button id="export-button" class="button" type="button">EXPORT CSV</button>
-      </section>
     </main>
     <script src="app.js"></script>
   </body>
