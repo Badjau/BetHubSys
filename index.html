@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Total Amount</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="page">
+      <form id="entry-form" class="entry-form" autocomplete="off">
+        <label class="field">
+          <span class="visually-hidden">Insert Number</span>
+          <input id="number" name="number" type="text" placeholder="Insert Number" required>
+        </label>
+        <label class="field">
+          <span class="visually-hidden">Quantity</span>
+          <input id="quantity" name="quantity" type="number" min="0.01" step="any" placeholder="Quantity" required>
+        </label>
+        <label class="field">
+          <span class="visually-hidden">Enter Amount</span>
+          <input id="amount" name="amount" type="number" min="0.01" step="any" placeholder="Enter Amount" required>
+        </label>
+        <button class="button add-button" type="submit">ADD</button>
+      </form>
+
+      <section aria-label="Entries" class="entries">
+        <table>
+          <thead>
+            <tr><th scope="col">Number</th><th scope="col">Quantity</th><th scope="col">Amount</th><th scope="col">Total Amount</th></tr>
+          </thead>
+          <tbody id="entry-rows"></tbody>
+        </table>
+      </section>
+
+      <section class="summary" aria-label="Total amount">
+        <span class="summary-label">TOTAL AMOUNT</span>
+        <output id="total-amount" class="summary-total">0.00</output>
+      </section>
+
+      <div class="submit-row">
+        <button id="submit-button" class="button" type="button">SUBMIT</button>
+      </div>
+
+      <section id="overview" class="overview" aria-labelledby="overview-title" hidden>
+        <h1 id="overview-title">Overview</h1>
+        <p id="overview-total" class="overview-total"></p>
+        <button id="export-button" class="button" type="button">EXPORT CSV</button>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
