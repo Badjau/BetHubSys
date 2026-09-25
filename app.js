@@ -3,8 +3,13 @@ const rows = document.querySelector("#entry-rows");
 const totalOutput = document.querySelector("#total-amount");
 const submitButton = document.querySelector("#submit-button");
 const amountInput = document.querySelector("#amount");
+const overviewActions = document.querySelector("#overview-actions");
+const overviewTotal = document.querySelector("#overview-total");
+const resetButton = document.querySelector("#reset-button");
+const exportButton = document.querySelector("#export-button");
 
 const entries = new Map();
+const paidEntries = new Map();
 let nextEntryId = 1;
 const money = new Intl.NumberFormat(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const tableNumber = new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 });
@@ -138,12 +143,38 @@ form.addEventListener("submit", (event) => {
 submitButton.addEventListener("click", () => {
   if (entries.size === 0) return;
 
-  const paidEntries = [...entries.values()].map((entry) => ({ ...entry }));
-  downloadCsv(paidEntries);
+  for (const entry of entries.values()) {
+    const key = JSON.stringify([entry.number, entry.amount.toFixed(2)]);
+    const paidEntry = paidEntries.get(key);
+    if (paidEntry) {
+      paidEntry.quantity += entry.quantity;
+    } else {
+      paidEntries.set(key, { number: entry.number, quantity: entry.quantity, amount: entry.amount });
+    }
+  }
+
   entries.clear();
   form.reset();
   render();
+  renderOverview();
 });
+
+resetButton.addEventListener("click", () => {
+  if (paidEntries.size === 0 || !window.confirm("Clear all entries saved in the overview?")) return;
+  paidEntries.clear();
+  renderOverview();
+});
+
+exportButton.addEventListener("click", () => {
+  if (paidEntries.size === 0) return;
+  downloadCsv([...paidEntries.values()]);
+});
+
+function renderOverview() {
+  const grandTotal = [...paidEntries.values()].reduce((sum, entry) => sum + entry.quantity * entry.amount, 0);
+  overviewTotal.textContent = money.format(grandTotal);
+  overviewActions.hidden = paidEntries.size === 0;
+}
 
 function csvCell(value) {
   return `"${String(value).replaceAll('"', '""')}"`;

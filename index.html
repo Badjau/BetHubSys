@@ -34,13 +34,24 @@
       </section>
 
       <section class="summary" aria-label="Total amount">
-        <span class="summary-label">TOTAL AMOUNT</span>
-        <output id="total-amount" class="summary-total">0.00</output>
+        <div id="overview-actions" class="summary-actions" hidden>
+          <span class="overview-label">Overview</span>
+          <p class="overview-total-label">Total Amount: <output id="overview-total">0.00</output></p>
+          <div class="overview-buttons">
+            <button id="reset-button" class="button export-button" type="button">RESET</button>
+            <button id="export-button" class="button export-button" type="button">EXPORT CSV</button>
+          </div>
+        </div>
+        <div class="summary-result">
+          <span class="summary-label">TOTAL AMOUNT</span>
+          <output id="total-amount" class="summary-total">0.00</output>
+        </div>
       </section>
 
       <div class="submit-row">
         <button id="submit-button" class="button" type="button">PAY</button>
       </div>
+
 
     </main>
     <script src="app.js"></script>
