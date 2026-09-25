@@ -191,7 +191,10 @@ function downloadCsv(paidEntries) {
   const url = URL.createObjectURL(file);
   const link = document.createElement("a");
   link.href = url;
-  link.download = "total-amount.csv";
+  const now = new Date();
+  const pad = (part) => String(part).padStart(2, "0");
+  const timestamp = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}_${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
+  link.download = `total-amount-${timestamp}.csv`;
   link.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
